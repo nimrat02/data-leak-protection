@@ -10,7 +10,7 @@ from watchdog.events import FileSystemEventHandler
 
 
 class Handler(FileSystemEventHandler):
-    def __init__(self):
+    def __init__(self):  # open csv file
         file_exists = os.path.isfile('Events.csv')
         self.wr = open("Events.csv", "a")
         self.event_writer = csv.writer(self.wr)
@@ -19,6 +19,7 @@ class Handler(FileSystemEventHandler):
         if not file_exists:
             self.event_writer.writerow(fields)
 
+    # functions according to event occured
     def on_created(self, event):
         file_type = 'Directory' if event.is_directory else 'File'
         now = datetime.now()
@@ -39,13 +40,14 @@ class Handler(FileSystemEventHandler):
         data = [now.date(), now.time(), file_type, os.path.basename(event.src_path),
                 event.src_path, "Modified"]
         self.event_writer.writerow(data)
+    # close csv file
 
     def __del__(self):
         self.wr.close()
 
 
 if __name__ == '__main__':
-
+    # calling the handler class
     event_handler = Handler()
 
     if len(sys.argv) != 2:
@@ -59,7 +61,9 @@ if __name__ == '__main__':
         print('Enter valid file path.')
         sys.exit()
 
+    # executing observer class
     observer = Observer()
+    # recursive = true will monitor all sub-directories
     observer.schedule(event_handler, path, recursive=True)
     observer.start()
 
