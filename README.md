@@ -8,6 +8,7 @@ Monitor file system to prevent sharing of the files outside organisational purvi
 
 ```bash
   git clone https://github.com/nimrat02/data-leak-protection.git
+  cd data-leak-protection/
 ```
 
 ## Install dependencies
@@ -30,3 +31,5 @@ For `Python 3:`
   python3 main.py <dirpath>
 ```
 `<dirpath> should be path to root directory to be monitored`
+
+
