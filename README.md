@@ -46,3 +46,12 @@ In the starting of the program, 'Monitoring starts' will be printed in the conso
 ## Libraries Used
 watchdog
 csv
+
+## To run as a background process on start up
+In **Linux** it can be added to cron: crontab -e
+
+```@reboot python /home/user/myscript.py```
+(@reboot is for reboots and startups)
+
+In **Windows** you can use the **Task Scheduler** and define the "triggered by" as Startup.
+ The program will be executed as a script.
